@@ -1,0 +1,12 @@
+{
+  "name": "usd-vnd-calculator",
+  "version": "1.0.0",
+  "description": "Tính toán tỷ giá USD - VND",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": ["calculator", "currency", "usd", "vnd"],
+  "author": "Noah",
+  "license": "MIT"
+}
