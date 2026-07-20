@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USD-VND Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .rate {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f0fff4;
+            border-radius: 10px;
+            display: none;
+        }
+        .result.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>USD-VND Calculator</h1>
+        <div class="rate">80,000 VND = 10 USD</div>
+        <label>Chọn đơn vị:</label>
+        <select id="unit">
+            <option value="vnd">VND</option>
+            <option value="usd">USD</option>
+        </select>
+        <label>Nhập số:</label>
+        <input type="number" id="input" placeholder="Nhập số...">
+        <button onclick="convert()">Tính Toán</button>
+        <div class="result" id="result">
+            <div id="value"></div>
+            <div id="unit-label"></div>
+        </div>
+    </div>
+    <script>
+        function convert() {
+            const input = document.getElementById('input').value;
+            const unit = document.getElementById('unit').value;
+            const result = document.getElementById('result');
+            const value = document.getElementById('value');
+            const unitLabel = document.getElementById('unit-label');
+            const rate = 8000;
+            result.classList.remove('show');
+            if (input === '' || isNaN(input) || parseFloat(input) < 0) {
+                alert('Vui lòng nhập số hợp lệ!');
+                return;
+            }
+            let resultValue;
+            if (unit === 'vnd') {
+                resultValue = parseFloat(input) / rate;
+                value.textContent = resultValue.toFixed(2);
+                unitLabel.textContent = 'USD';
+            } else {
+                resultValue = parseFloat(input) * rate;
+                value.textContent = resultValue.toLocaleString('vi-VN');
+                unitLabel.textContent = 'VND';
+            }
+            result.classList.add('show');
+        }
+    </script>
+</body>
+</html>
